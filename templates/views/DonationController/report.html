@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block title %} Report {% endblock %}
+{% block content %}
+
+<nav class="ui inverted menu">
+  <header class="header item"> <a href="/"> Donation </a> </header>
+  <div class="right menu">
+    <a class="item" href="/donation"> Donate</a>
+    <a class="active item" href="/donation/report">  Report</a>
+    <a class="item" href="/logout">  Logout</a>
+  </div>
+</nav>
+
+  <section class="ui raised segment">
+    <div class="ui grid">
+      <aside class="six wide column">
+        <img src="{{ url_for('static', filename='homer5.jpg') }}" class="ui medium image">
+      </aside>
+      <article class="eight wide column">
+        <table class="ui celled table segment">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Method donated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for donation in donations %}
+              <tr>
+                <td>{{donation.amount}}</td>
+                <td>{{donation.method}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </section>
+
+{% endblock %}
