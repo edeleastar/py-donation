@@ -1,1 +1,2 @@
-__author__ = 'edeleastar'
+users = {}
+donations = []

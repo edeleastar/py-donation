@@ -1,5 +1,6 @@
-from flask import Flask
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, request, session
+from app.models.User import User
+from app.models import users
 
 class Accounts:
 
@@ -21,8 +22,19 @@ class Accounts:
 
   @staticmethod
   def register():
+    firstname = request.form['firstName']
+    lastname  = request.form['lastName']
+    email     = request.form['email']
+    password  = request.form['password']
+    users[email] = (User (firstname, lastname, email, password))
     return redirect('/')
 
   @staticmethod
   def authenticate():
-    return redirect('/donation')
+    email     = request.form['email']
+    password  = request.form['password']
+    if email in users and password == users[email].password:
+      session['logged_in'] = True
+      return redirect('/donation')
+    else:
+      return redirect('/')
