@@ -1,14 +1,19 @@
-from flask import Flask, request, session, g, redirect, url_for, abort,  render_template, flash, _app_ctx_stack
-from app.controllers.Accounts import Accounts
+from flask import Flask, request, session, g, redirect, url_for, abort,  render_template, flash, jsonify
 from app.controllers.DonationController import DonationController
+from app.models.User import User, users
 from flask.ext.script import Manager
-
+from app import createApp, app
 
 SECRET_KEY = 'development key'
 
-app = Flask(__name__)
-app.config.from_object(__name__)
+#app = Flask(__name__)
+#app.config.from_object(__name__)
+app = createApp()
 
+if __name__ == '__main__':
+  app.run(debug=True)
+
+'''
 @app.route('/')
 def index():
   return Accounts.index()
@@ -32,6 +37,7 @@ def logout():
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
   return Accounts.authenticate()
+'''
 
 @app.route('/donation')
 def donation():
@@ -45,5 +51,5 @@ def donate():
 def report():
   return DonationController.report()
 
-if __name__ == '__main__':
-  app.run(debug=True)
+
+
