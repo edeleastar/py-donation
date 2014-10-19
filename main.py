@@ -1,6 +1,8 @@
 from flask import Flask, request, session, g, redirect, url_for, abort,  render_template, flash, _app_ctx_stack
 from app.controllers.Accounts import Accounts
 from app.controllers.DonationController import DonationController
+from flask.ext.script import Manager
+
 
 SECRET_KEY = 'development key'
 
@@ -44,4 +46,4 @@ def report():
   return DonationController.report()
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run()
